@@ -9,7 +9,14 @@ import java.util.Timer;
 public class ChatServer {
 	ChatServer(){
 		Timer t = new Timer();
-		t.schedule(, delay);
+		t.schedule(new GetClients(), 0, 1);
 	}
-	class 
+	class GetClients extends TimerTask{
+
+		@Override
+		public void run() {
+			
+		}
+		
+	}
 }
