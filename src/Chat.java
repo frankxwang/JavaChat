@@ -9,7 +9,7 @@ import java.util.Timer;
 
 public class Chat {
 	JFrame frame;
-	JLabel chat;
+	JTextArea chat;
 	JScrollBar scroll;
 	JTextField message;
 	Socket chatSoc;
@@ -17,14 +17,17 @@ public class Chat {
 	public static int H = 500;
 	Chat(){
 		try{
-			chatSoc = new Socket("127.0.0.1", 5000);
+			chatSoc = new Socket("127.0.0.1", 3000);
 		}catch(Exception e){}
 		frame = new JFrame("Chat'in' 4'ev'r");
 		
-		chat = new JLabel("Welcome");
-		chat.setHorizontalAlignment(SwingConstants.CENTER);
+		chat = new JTextArea("Welcome");
+//		((JTextField) chat).setHorizontalAlignment(SwingConstants.CENTER);
 		scroll = new JScrollBar();
 		scroll.add(chat);
+		
+		chat.setEditable(false);
+		chat.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
 		message = new JTextField();
 		
@@ -35,7 +38,8 @@ public class Chat {
 		frame.add(chat, BorderLayout.CENTER);
 		frame.add(message, BorderLayout.SOUTH);
 		frame.pack();
-		
+		Timer t = new Timer();
+		t.schedule(new CheckChat(), 0, 100);
 		message.addKeyListener(new KeyListener(){
 
 			@Override
@@ -53,8 +57,6 @@ public class Chat {
 				}
 			}
 		});
-		Timer t = new Timer();
-		t.schedule(new CheckChat(), 0, 100);
 	}
 	
 	class CheckChat extends TimerTask{
@@ -75,10 +77,9 @@ public class Chat {
 				BufferedReader br = new BufferedReader(isr);
 				String get;
 				while((get = br.readLine()) != null){
-					chat.setText(chat.getText() + get);
+					chat.setText(chat.getText() + "\n" + get);
 				}
-				br.close();
-			} catch (Exception e) {}
+			} catch (Exception e) {e.printStackTrace();}
 		}
 	}
 	
@@ -89,8 +90,7 @@ public class Chat {
 				pw.println(message.getText());
 				pw.flush();
 				message.setText("");
-				pw.close();
-			} catch (Exception e){}
+			} catch (Exception e){e.printStackTrace();}
 		}
 	}
 }
