@@ -30,15 +30,16 @@ public class Chat implements ActionListener{
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if(arg0.getKeyCode() == KeyEvent.VK_ENTER && !(textField.getText().trim() == "")){
-					//System.out.println("HI");
-					//System.out.println(textField.getText());
-				}
+				
 			}
 
 			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
+			public void keyReleased(KeyEvent e){
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					Runnable r = new Send();
+					Thread t = new Thread(r);
+					t.start();
+				}
 				
 			}
 
