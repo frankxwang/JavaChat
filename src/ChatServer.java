@@ -18,7 +18,7 @@ public class ChatServer{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		new GetClients();
+		t.schedule(new GetClients(), 0, 1);
 	}
 	class GetClients extends TimerTask{
 		
