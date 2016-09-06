@@ -73,7 +73,10 @@ public class Chat {
 			try {
 				InputStreamReader isr = new InputStreamReader(chatSoc.getInputStream());
 				BufferedReader br = new BufferedReader(isr);
-				chat.setText(chat.getText() + br.readLine());
+				String get;
+				while((get = br.readLine()) != null){
+					chat.setText(chat.getText() + get);
+				}
 				br.close();
 			} catch (Exception e) {}
 		}
