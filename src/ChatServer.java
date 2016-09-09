@@ -14,7 +14,8 @@ public class ChatServer{
 	ChatServer(){
 		Timer t = new Timer();
 		try {
-			server = new ServerSocket(3000);
+			InetAddress addr = InetAddress.getByName("0.0.0.0");
+			server = new ServerSocket(17771, 4, addr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

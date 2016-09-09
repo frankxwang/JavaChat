@@ -17,7 +17,7 @@ public class Chat {
 	public static int H = 500;
 	Chat(){
 		try{
-			chatSoc = new Socket("0.0.0.0", 3000);
+			chatSoc = new Socket("0.0.0.0", 17771);
 		}catch(Exception e){}
 		frame = new JFrame("Chat'in' 4'ev'r");
 		
